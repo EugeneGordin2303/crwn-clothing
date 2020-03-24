@@ -4,22 +4,7 @@ import {Route,Switch} from 'react-router-dom';
 import './App.css';
 
 import HomePage from './components/pages/homepage/homepage.component';
-
-const HatsPage = () => (
-
-  <div>
-    <h1 >Hats Page</h1>
-  </div>
-
-);
-
-const JacketsPage = () => (
-
-  <div>
-    <h1 >Jackets Page</h1>
-  </div>
-
-);
+import ShopPage from './components/pages/shop/shop.component';
 
 function App() {
   return (
@@ -27,8 +12,7 @@ function App() {
       {/*<HomePage ></HomePage>*/}
       <Switch>
         <Route exact path='/' component={HomePage} /> 
-        <Route path='/shop/hats' component={HatsPage} /> 
-        <Route path='/shop/jackets' component={JacketsPage} /> 
+        <Route path='/shop' component={ShopPage} /> 
       </Switch>
     </div>
   );
