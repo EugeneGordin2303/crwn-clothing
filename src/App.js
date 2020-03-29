@@ -42,12 +42,7 @@ class App extends React.Component {
         this.setState({
           currentUser:userAuth
         })
-
-        console.log('here....' + userAuth);
       }
-
-
-
     });
   }
 
