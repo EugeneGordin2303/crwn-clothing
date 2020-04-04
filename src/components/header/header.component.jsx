@@ -30,9 +30,7 @@ const Header = ({ currentUser, hidden }) => (
                     SIGN IN
                 </Link>
             }
-            <Link  to='/'>
-                <CartIcon />
-            </Link>
+            <CartIcon />
         </div>
         {
             hidden ? null :
