@@ -34,9 +34,29 @@ const googleSignInStyles = css`
   }
 `;
 
+const collectionItemButtonStyles = css`
+  width: 80%;
+  position: absolute;
+  top: 255px;
+  opacity: 0.7;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+
+  &:hover {
+    opacity: 0.85;
+    display: flex;
+    background-color: black;
+    color: white;
+    border: none;
+  }
+`;
+
 const getButtonStyles = props => {
   if(props.isGoogleSignIn){
     return googleSignInStyles;
+  }else if (props.isCollectionItemButton){
+    return collectionItemButtonStyles;
   }
 
   return props.inverted ? invertedButtonStyles : buttonStyles;
