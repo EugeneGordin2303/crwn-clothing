@@ -52,11 +52,28 @@ const collectionItemButtonStyles = css`
   }
 `;
 
+const cartDropdownButtonStyles = css`
+   margin-top: auto;
+   background-color: black;
+   color: white;
+   border: none;
+
+   &:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+  }
+`;
+
+
+
 const getButtonStyles = props => {
   if(props.isGoogleSignIn){
     return googleSignInStyles;
   }else if (props.isCollectionItemButton){
     return collectionItemButtonStyles;
+  }else if (props.isCartDropdownButton){
+    return cartDropdownButtonStyles;
   }
 
   return props.inverted ? invertedButtonStyles : buttonStyles;
