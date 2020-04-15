@@ -34,24 +34,6 @@ const googleSignInStyles = css`
   }
 `;
 
-const collectionItemButtonStyles = css`
-  width: 80%;
-  position: absolute;
-  top: 255px;
-  opacity: 0.7;
-  background-color: white;
-  color: black;
-  border: 1px solid black;
-
-  &:hover {
-    opacity: 0.85;
-    display: flex;
-    background-color: black;
-    color: white;
-    border: none;
-  }
-`;
-
 const cartDropdownButtonStyles = css`
    margin-top: auto;
    background-color: black;
@@ -65,13 +47,9 @@ const cartDropdownButtonStyles = css`
   }
 `;
 
-
-
 const getButtonStyles = props => {
   if(props.isGoogleSignIn){
     return googleSignInStyles;
-  }else if (props.isCollectionItemButton){
-    return collectionItemButtonStyles;
   }else if (props.isCartDropdownButton){
     return cartDropdownButtonStyles;
   }
