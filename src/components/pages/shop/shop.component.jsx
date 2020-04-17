@@ -1,15 +1,72 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import { updateCollections } from '../../../redux/shop/shop.actions';
+
+import WithSpinner from '../../with-spinner/with-spinner.component'
+
+import {
+  firestore,
+  convertCollectionsSnapshotToMap
+} from '../../../firebase/firebase.utils';
+
+import CollectionsOverview from '../../collections-overview/collections-overview.component';
 import CollectionPage from '../collection/collection.component';
 
-import CollectionOverview from './../../collections-overview/collections-overview.component';
+const CollectionPageWithLoading = WithSpinner(CollectionPage);
+const CollectionsOverviewWithLoading = WithSpinner(CollectionsOverview);
 
-const ShopPage = ({ match }) => (
-    <div className='shop-page'>
-        <Route exact path={`${match.path}`} component={CollectionOverview}/>
-        <Route path={`${match.path}/:id`} component={CollectionPage}/>
-    </div>
-)
+class ShopPage extends React.Component {
+  constructor() {
+    super();
 
-export default ShopPage;
+    this.state = {
+      loading: true
+    };
+  }
+  unsubscribeFromSnapshot = null;
+
+  componentDidMount() {
+    const { updateCollections } = this.props;
+    const collectionRef = firestore.collection('collections');
+
+    this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
+      const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+      updateCollections(collectionsMap);
+      this.setState({ loading: false });
+    });
+  }
+
+  render() {
+    const { match } = this.props;
+    const { loading } = this.state;
+    return (
+      <div className='shop-page'>
+        <Route
+          exact
+          path={`${match.path}`}
+          render={props => (
+            <CollectionsOverviewWithLoading isLoading={loading} {...props} />
+          )}
+        />
+        <Route
+          path={`${match.path}/:collectionId`}
+          render={props => (
+            <CollectionPageWithLoading isLoading={loading} {...props} />
+          )}
+        />
+      </div>
+    );
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  updateCollections: collectionsMap =>
+    dispatch(updateCollections(collectionsMap))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ShopPage);
