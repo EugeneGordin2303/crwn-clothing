@@ -11,7 +11,7 @@ import {
   convertCollectionsSnapshotToMap
 } from '../../../firebase/firebase.utils';
 
-import CollectionsOverview from '../../collections-overview/collections-overview.component';
+import { default as CollectionsOverview } from '../../collections-overview/collections-overview.container';
 import CollectionPage from '../collection/collection.component';
 
 const CollectionPageWithLoading = WithSpinner(CollectionPage);
