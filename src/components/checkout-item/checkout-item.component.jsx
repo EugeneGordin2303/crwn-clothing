@@ -1,9 +1,5 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
-
-import { clearCartItem, removeCartItem,addCartItem } from './../../redux/cart/cart.actions';
-
 import {
     CheckoutItemContainer,
     ImageContainer,
@@ -35,10 +31,4 @@ const CheckoutItem = ({ cartItem, clearItem, removeItem, addItem }) => {
     );
 };
 
-const mapDispatchToProps = dispatch => ({
-    clearItem: item => dispatch(clearCartItem(item)),
-    removeItem: item => dispatch(removeCartItem(item)),
-    addItem: item => dispatch(addCartItem(item))
-});
-
-export default connect(null, mapDispatchToProps)(CheckoutItem);
+export default CheckoutItem;
